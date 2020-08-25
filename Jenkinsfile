@@ -16,8 +16,8 @@ def SH_WITH_RETRIES_AND_RETURN( String cmd, Integer retries=5, Integer sleepSeco
   }
 }
 pipeline {
-  // agent any
-  agent {label 'ec2-fleet'}  
+   agent any
+  // agent {label 'ec2-fleet'}  
   tools {nodejs "node"}
     
   stages {
