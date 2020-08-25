@@ -1,6 +1,6 @@
 pipeline {
   // agent any
-  agent {label 'Jenkins-slave'}  
+  agent {label 'ec2-fleet'}  
   tools {nodejs "node"}
     
   stages {
@@ -29,7 +29,7 @@ pipeline {
             script {
                 sshPublisher(publishers: [
                     sshPublisherDesc(
-                        configName: 'ec2-fleet',
+                        configName: 'ec2-user',
                         transfers: [
                             sshTransfer(
                                 sourceFiles: "app.js",
