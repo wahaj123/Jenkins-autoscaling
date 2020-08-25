@@ -1,3 +1,20 @@
+def SH_WITH_RETRIES_AND_RETURN( String cmd, Integer retries=5, Integer sleepSeconds=10  ){
+  def retriesCount = 0
+  echo COLORS.BLACK_BOLD("sh[retries=${retries}]:")+" ${cmd}"
+  try {
+    retry( retries ){
+      retriesCount = retriesCount+1
+      echo COLORS.YELLOW("attempt ${retriesCount}/$retries")
+      if( retriesCount > 1 ){
+        sleep sleepSeconds
+        sleepSeconds = sleepSeconds+1
+      }
+      return sh( returnStdout: true, script: "${cmd}").trim()
+    }
+  } catch(e) {
+    throw e
+  }
+}
 pipeline {
   // agent any
   agent {label 'ec2-fleet'}  
@@ -19,6 +36,9 @@ pipeline {
      
     stage('Build') {
       steps {
+        script{
+          SH_WITH_RETRIES_AND_RETURN("curl localhost:9090")
+        }
         sh 'pwd'
         // sh 'npm install'
         // sh 'npm install express'
@@ -34,7 +54,7 @@ pipeline {
                             sshTransfer(
                                 sourceFiles: "app.js",
                                 execCommand: "npm install; npm install express; export BUILD_ID=dontKillMe; nohup node app.js & ",
-                                remoteDirectory: '/home/ec2-user/jenkins' 
+                                // remoteDirectory: '/home/ec2-user/jenkins'  
                             )
                         ],
                         usePromotionTimestamp: false,
