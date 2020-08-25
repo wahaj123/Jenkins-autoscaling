@@ -33,7 +33,7 @@ pipeline {
                         transfers: [
                             sshTransfer(
                                 sourceFiles: "app.js",
-                                execCommand: "npm install; npm install express; export BUILD_ID=dontKillMe; killall node; node app.js | at -m now",
+                                execCommand: "npm install; npm install express; killall node; node app.js | at -m now",
                                 // remoteDirectory: '/home/ec2-user/jenkins'  
                             )
                         ],
