@@ -37,7 +37,7 @@ pipeline {
     stage('Build') {
       steps {
         script{
-          SH_WITH_RETRIES_AND_RETURN("curl localhost:9090")
+          SH_WITH_RETRIES_AND_RETURN("curl localhost:8080")
         }
         sh 'pwd'
         // sh 'npm install'
