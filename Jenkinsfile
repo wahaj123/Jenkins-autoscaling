@@ -1,6 +1,6 @@
 pipeline {
-   agent any
-  // agent {label 'ec2-fleet'}  
+  //agent any
+  agent {label 'jnlp'}  
   tools {nodejs "node"}
     
   stages {
