@@ -1,20 +1,3 @@
-def SH_WITH_RETRIES_AND_RETURN( String cmd, Integer retries=5, Integer sleepSeconds=10  ){
-  def retriesCount = 0
-  echo "sh[retries=${retries}]: ${cmd}"
-  try {
-    retry( retries ){
-      retriesCount = retriesCount+1
-      echo "attempt ${retriesCount}/$retries"
-      if( retriesCount > 1 ){
-        sleep sleepSeconds
-        sleepSeconds = sleepSeconds+1
-      }
-      return sh( returnStdout: true, script: "${cmd}").trim()
-    }
-  } catch(e) {
-    throw e
-  }
-}
 pipeline {
    agent any
   // agent {label 'ec2-fleet'}  
@@ -36,10 +19,6 @@ pipeline {
      
     stage('Build') {
       steps {
-        script{
-          def output = SH_WITH_RETRIES_AND_RETURN("curl localhost:8080")
-          echo "hello ${output}"
-        }
         sh 'pwd'
         // sh 'npm intstall'
         // sh 'npm install express'
