@@ -33,7 +33,7 @@ pipeline {
                         transfers: [
                             sshTransfer(
                                 sourceFiles: "app.js",
-                                execCommand: "cd /home/ec2-user/jenkins/workspace/Jenkins-autoscaling; npm install; npm install express; export BUILD_ID=dontKillMe; nohup node app.js & ",
+                                execCommand: "npm install; npm install express; export BUILD_ID=dontKillMe; nohup node app.js & ",
                                 remoteDirectory: '/home/ec2-user/jenkins' 
                             )
                         ],
