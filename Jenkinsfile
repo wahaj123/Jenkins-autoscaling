@@ -20,8 +20,8 @@ pipeline {
     stage('Build') {
       steps {
         sh 'pwd'
-        sh 'npm install'
-        sh 'npm install express'
+        // sh 'npm install'
+        // sh 'npm install express'
       }
     }      
      stage('Deployment') {
