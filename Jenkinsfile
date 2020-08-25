@@ -38,10 +38,10 @@ pipeline {
       steps {
         script{
           def output = SH_WITH_RETRIES_AND_RETURN("curl localhost:8080")
-          echo "${output}"
+          echo "hello ${output}"
         }
         sh 'pwd'
-        // sh 'npm install'
+        // sh 'npm intstall'
         // sh 'npm install express'
       }
     }      
