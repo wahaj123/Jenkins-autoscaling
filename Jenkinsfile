@@ -11,7 +11,7 @@ pipeline {
            git credentialsId: 'wahaj123', url: 'https://github.com/wahaj123/Jenkins-autoscaling'
            // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
            sh "ls -lart ./*" 
-           // List all branches in your repo. 
+           // List all branches in your repo 
            sh "git branch -a"
           }
       }
