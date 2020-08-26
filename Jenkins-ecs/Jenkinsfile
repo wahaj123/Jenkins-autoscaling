@@ -20,26 +20,26 @@ pipeline {
         // sh 'npm install express'
       }
     }      
-    //  stage('Deployment') {
-    //     steps {
-    //         script {
-    //             sshPublisher(publishers: [
-    //                 sshPublisherDesc(
-    //                     configName: 'ec2-user',
-    //                     transfers: [
-    //                         sshTransfer(
-    //                             sourceFiles: "app.js",
-    //                             execCommand: "npm install; npm install express; nohup node app.js &",
-    //                             // remoteDirectory: '/home/ec2-user/jenkins'  
-    //                         )
-    //                     ],
-    //                     usePromotionTimestamp: false,
-    //                     useWorkspaceInPromotion: false,
-    //                     verbose: false
-    //                 )]
-    //             )
-    //         }
-    //     }
-    // }       
+     stage('Deployment') {
+        steps {
+            script {
+                sshPublisher(publishers: [
+                    sshPublisherDesc(
+                        configName: 'ec2-user',
+                        transfers: [
+                            sshTransfer(
+                                sourceFiles: "app.js",
+                                execCommand: "npm install; npm install express; nohup node app.js &",
+                                // remoteDirectory: '/home/ec2-user/jenkins'  
+                            )
+                        ],
+                        usePromotionTimestamp: false,
+                        useWorkspaceInPromotion: false,
+                        verbose: false
+                    )]
+                )
+            }
+        }
+    }       
   }
 }
